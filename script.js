@@ -7,6 +7,8 @@
     var Values = ["Ace","King","Queen","Jack","Ten","Nine","Eight","Seven","Six",
                 "Five","Four","Three","Two"];
     var Deck = [ ];
+
+    var PlayersHand = [ ];
     //Create function that will create deck
     function CreateDeck()
     {
@@ -21,19 +23,56 @@
                 Deck.push(card);
             }
         }
+        return Deck;
     }
 
-    CreateDeck();
+
 
     //Show card function
-    function ShowCard(card)
+    function ShowCard(hand)
     {
-        console.log(card.Value);
+         var playerHand = hand;
+         for(var i = 0; i < playerHand.length; i++)
+         {
+             console.log(playerHand[i].Value+" of "+ playerHand[i].Suit);
+         }
+        
+        
     }
 
-    ShowCard(Deck[1]);
-    ShowCard(Deck[2]);
+    //Pick random Card
+    function pickRandomCard(deckParam)
+    {
+        var randomCard = deckParam[Math.floor(Math.random()*deckParam.length)];
+        return randomCard;
+    }
+
+    //Remove from Deck function
+    function RemoveFromDeck(randomNum)
+    {
+        Deck.splice(randomNum,1);
+    }
+
+    //Push card to players hand
+    function HandCardToPlayer(deck)
+    {
+        var selectedCard = pickRandomCard(deck);
+        RemoveFromDeck(selectedCard);
+        PlayersHand.push(selectedCard);
+    }
    
-    
-//TODO: Deal player cards
-//TODO: Deal House Cards
+/*
+=================================================
+Calling the functions from above
+=================================================
+*/
+
+
+    //Create Deck
+    CreateDeck();
+    HandCardToPlayer(Deck);
+    HandCardToPlayer(Deck);
+    ShowCard(PlayersHand);
+
+        
+
